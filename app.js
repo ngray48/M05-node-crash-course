@@ -1,6 +1,5 @@
 const express = require('express');
-//const { Server } = require('http');
-//const { serialize } = require('v8');
+const morgan = require('morgan');
 
 
 //express app
@@ -12,12 +11,9 @@ app.set('view engine', 'ejs');
 //listen for requests
 app.listen(3000);
 
-app.use((req, res)=> {
-    console.log('new request made:');
-    console.log('host: ', req.hostname);
-    console.log('path: ', req.path);
-    console.log('method: ',req.method);
-})
+//middleware & static files
+app.use(express.static('public'));
+app.use(morgan('dev'));
 
 app.get('/',(req,res) => {
     const blogs = [
